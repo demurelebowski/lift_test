@@ -27,13 +27,16 @@ public class LiftService {
         Floor floor = building.getFloors().get(building.getLift_on_floor() - 1);
         Lift lift = building.getLift();
 
-        int next_floor;
+        int next_floor = 0;
         if (building.getLift_on_floor() == 1) {
             building.setLift_direction(true);
             next_floor = 2;
         } else if (building.getLift_on_floor() == building.getFloors().size()) {
             building.setLift_direction(false);
             next_floor = building.getFloors().size() - 1;
+        } else if (!(building.getMaxFloorWithPassengers() == 0) && building.getLift_on_floor() == building.getMaxFloorWithPassengers() && building.getLift_direction()) {
+            building.setLift_direction(false);
+            next_floor = floor.getIndex() - 1;
         } else if (building.getLift_direction()) {
             next_floor = floor.getIndex() + 1;
         } else {

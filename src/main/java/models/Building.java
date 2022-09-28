@@ -39,6 +39,28 @@ public class Building {
         return floors;
     }
 
+    public int getMaxDesiredFloor() {
+
+        if (this.floors.isEmpty()) {
+            return 0;
+        } else {
+            return this.floors.stream().mapToInt(i -> i.getMaxDesiredFloor()).max().getAsInt();
+        }
+
+    }
+
+    public int getMaxFloorWithPassengers() {
+        if (this.floors.isEmpty()) {
+            return 0;
+        } else {
+            if (this.floors.stream().anyMatch(i -> i.getResidents().size() > 0)) {
+                return this.floors.stream().filter(i -> i.getResidents().size() > 0).mapToInt(i -> i.getIndex()).max().getAsInt();
+            } else {
+                return 0;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Building{" +

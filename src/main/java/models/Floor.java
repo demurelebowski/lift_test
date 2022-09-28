@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Floor implements HasPeople {
+    private final int index;
     private List<Passenger> residents;
     private int passengersOut;
-    private final int index;
 
     public Floor(Integer index, int stories) {
         this.index = index;
@@ -57,5 +57,14 @@ public class Floor implements HasPeople {
     @Override
     public void putPeople(Passenger passenger) {
         this.residents.add(passenger);
+    }
+
+    @Override
+    public int getMaxDesiredFloor() {
+        if (!this.residents.isEmpty()) {
+            return this.residents.stream().map(i -> i.getDestination()).mapToInt(i -> i).max().getAsInt();
+        } else {
+            return 0;
+        }
     }
 }

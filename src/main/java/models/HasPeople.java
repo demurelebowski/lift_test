@@ -3,7 +3,9 @@ package models;
 import java.util.List;
 
 public interface HasPeople {
-    List<Passenger> get();
+    List<Passenger> getPeople();
 
-    void put(Passenger passenger);
+    void putPeople(Passenger passenger);
+
+    int getMaxDesiredFloor();
 }
