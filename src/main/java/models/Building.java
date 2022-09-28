@@ -6,7 +6,8 @@ public class Building {
     List<Floor> floors;
     Lift lift;
     Boolean lift_direction; // true = up
-    Integer lift_on_floor;
+    int lift_on_floor;
+
     public Building(List<Floor> floors) {
         this.floors = floors;
         this.lift = new Lift();

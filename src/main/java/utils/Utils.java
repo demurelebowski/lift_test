@@ -20,21 +20,24 @@ public class Utils {
             StringBuilder sb = new StringBuilder();
             sb.append(padRight(f.getIndex().toString() + "[" + f.getPassengersOut() + "]", 5)).append(" | ");
             if (building.getLift_on_floor() == f.getIndex()) {
-                if (building.getLift_direction() == true) {
+                if (building.getLift_direction()) {
                     sb.append("↑ LIFT ↑ ");
                 } else {
                     sb.append("↓ LIFT ↓ ");
                 }
                 sb.append("[");
-                List<Passenger> passengersInLift = building.getLift().get();
+                List<Passenger> passengersInLift = building.getLift().getPeople();
+                StringBuilder sb2 = new StringBuilder();
                 if (!(passengersInLift == null)) {
                     for (Passenger p : passengersInLift) {
-                        sb.append(p.getDestination().toString()).append(",");
+                        sb2.append(p.getDestination().toString()).append(",");
                     }
+                    sb2.append("]");
+                    sb.append(padRight(sb2.toString(), 20));
                 }
-                sb.append("]         |");
+
             } else {
-                sb.append(padRight("            ", 30));
+                sb.append(padRight("", 30));
             }
             sb.append("|");
             for (Passenger p : f.getResidents()) {

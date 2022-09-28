@@ -6,9 +6,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Floor implements HasPeople {
-    private List<Passenger> residents = new ArrayList<>();
+    private List<Passenger> residents;
     private int passengersOut;
-    private Integer index;
+    private final int index;
 
     public Floor(Integer index, int stories) {
         this.index = index;
@@ -40,7 +40,7 @@ public class Floor implements HasPeople {
     }
 
     public List<Passenger> getPassengersWhoNeedThatWay(Boolean direction, int lift_capacity) {
-        if (direction == true) {
+        if (direction) {
             return this.residents.stream().filter(i -> i.getDestination() > this.index).limit(lift_capacity).collect(Collectors.toList());
         } else {
             return this.residents.stream().filter(i -> i.getDestination() < this.index).limit(lift_capacity).collect(Collectors.toList());
@@ -49,13 +49,13 @@ public class Floor implements HasPeople {
     }
 
     @Override
-    public List<Passenger> get() {
+    public List<Passenger> getPeople() {
 
         return this.residents;
     }
 
     @Override
-    public void put(Passenger passenger) {
+    public void putPeople(Passenger passenger) {
         this.residents.add(passenger);
     }
 }

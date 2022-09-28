@@ -3,7 +3,7 @@ package models;
 import java.util.Random;
 
 public class Passenger {
-    private Integer destination;
+    private int destination;
     private Boolean arrived;
 
     public Passenger(int stories, int floor_index) {
@@ -12,7 +12,6 @@ public class Passenger {
         }
         while (this.destination == floor_index);
 
-        this.arrived = arrived;
     }
 
     public Boolean getArrived() {
