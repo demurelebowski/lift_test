@@ -60,6 +60,17 @@ public class Building {
             }
         }
     }
+    public int getMinFloorWithPassengers() {
+        if (this.floors.isEmpty()) {
+            return 0;
+        } else {
+            if (this.floors.stream().anyMatch(i -> i.getResidents().size() > 0)) {
+                return this.floors.stream().filter(i -> i.getResidents().size() > 0).mapToInt(i -> i.getIndex()).min().getAsInt();
+            } else {
+                return 0;
+            }
+        }
+    }
 
     @Override
     public String toString() {

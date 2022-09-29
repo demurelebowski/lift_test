@@ -18,7 +18,13 @@ public class Lift implements HasPeople {
             return 0;
         }
     }
-
+    public int getMinDesiredFloor() {
+        if (!this.passengers.isEmpty()) {
+            return this.passengers.stream().map(i -> i.getDestination()).mapToInt(i -> i).min().getAsInt();
+        } else {
+            return 0;
+        }
+    }
 
     @Override
     public List<Passenger> getPeople() {

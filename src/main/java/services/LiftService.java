@@ -34,9 +34,12 @@ public class LiftService {
         } else if (building.getLift_on_floor() == building.getFloors().size()) {
             building.setLift_direction(false);
             next_floor = building.getFloors().size() - 1;
-        } else if (!(building.getMaxFloorWithPassengers() == 0) && building.getLift_on_floor() == building.getMaxFloorWithPassengers() && building.getLift_direction()) {
+        } else if (building.getLift_direction() && building.getLift_on_floor() == floor.getIndex() && building.getLift_on_floor() == lift.getMaxDesiredFloor() && building.getMaxFloorWithPassengers() <= building.getLift_on_floor()) {
             building.setLift_direction(false);
             next_floor = floor.getIndex() - 1;
+        } else if (!building.getLift_direction() && building.getLift_on_floor() == floor.getIndex() && building.getLift_on_floor() == lift.getMinDesiredFloor() && building.getMinFloorWithPassengers() >= building.getLift_on_floor()) {
+            building.setLift_direction(true);
+            next_floor = floor.getIndex() + 1;
         } else if (building.getLift_direction()) {
             next_floor = floor.getIndex() + 1;
         } else {
